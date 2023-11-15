@@ -1,5 +1,6 @@
 import 'package:get/get_connect.dart';
 import 'package:heyflutter_weather_app/models/autocompletion_model.dart';
+import 'package:heyflutter_weather_app/models/place_detail_model.dart';
 import 'package:heyflutter_weather_app/models/weather_model.dart';
 import 'package:heyflutter_weather_app/repository/const.dart';
 
@@ -20,13 +21,14 @@ class Api extends GetConnect {
     return autoCompletionModelFromJson(response.bodyString.toString());
   }
 
-  Future getPlaceImage(String placeId) async {
+  Future<PlaceResultModel> getPlaceImage(String placeId) async {
     const dataId = "0x47d8a00baf21de75:0x52963a5addd52a99";
     const string =
         'https://serpapi.com/search.json?api_key=$serpApiKey&engine=google_maps_photos&data_id=$dataId';
     final response = await get(string);
     // 'https://serpapi.com/search.json?api_key=$serpApiKey&engine=google_maps_photos&data_id=$placeId');
 
-    print(string);
+    // print(string);
+    return placeResultModelFromJson(response.bodyString.toString());
   }
 }

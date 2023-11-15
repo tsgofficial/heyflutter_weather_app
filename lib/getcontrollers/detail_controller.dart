@@ -1,11 +1,13 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
+import 'package:heyflutter_weather_app/models/place_detail_model.dart';
 import 'package:heyflutter_weather_app/models/weather_model.dart';
 import 'package:heyflutter_weather_app/repository/apis/api.dart';
 
 class DetailController extends GetxController {
   final weatherResult = Rxn<WeatherModel>();
   final isLoadingGetWeather = false.obs;
+  final placeResult = PlaceResultModel().obs;
 
   Future<WeatherModel?> getWeatherByLocation(
       double longitude, double latitude) async {
@@ -38,5 +40,6 @@ class DetailController extends GetxController {
 
   Future getPlaceImage(String placeId) async {
     final response = await Api().getPlaceImage(placeId);
+    placeResult.value = response;
   }
 }
